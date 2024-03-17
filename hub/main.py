@@ -32,7 +32,6 @@ redis_client = Redis(host=REDIS_HOST, port=REDIS_PORT)
 store_adapter = StoreApiAdapter(api_base_url=STORE_API_BASE_URL)
 # Create an instance of the AgentMQTTAdapter using the configuration
 
-# FastAPI
 app = FastAPI()
 
 
@@ -46,7 +45,6 @@ async def save_processed_agent_data(processed_agent_data: ProcessedAgentData):
                 redis_client.lpop("processed_agent_data")
             )
             processed_agent_data_batch.append(processed_agent_data)
-        print(processed_agent_data_batch)
         store_adapter.save_data(processed_agent_data_batch=processed_agent_data_batch)
     return {"status": "ok"}
 
@@ -94,3 +92,9 @@ client.connect(MQTT_BROKER_HOST, MQTT_BROKER_PORT)
 
 # Start
 client.loop_start()
+
+# to use debug
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="127.0.0.1", port=9000)
