@@ -92,3 +92,9 @@ client.connect(MQTT_BROKER_HOST, MQTT_BROKER_PORT)
 
 # Start
 client.loop_start()
+
+# to use debug
+if __name__ == "__main__":
+    import uvicorn
+
+    uvicorn.run(app, host="127.0.0.1", port=9000)
