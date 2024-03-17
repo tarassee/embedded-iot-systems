@@ -3,7 +3,7 @@
 To start the Store, follow these steps:
 1. Clone the repository to your local machine:
 ```bash
-git clone https://github.com/Toolf/store.git
+git clone https://github.com/Tools/store.git
 cd store
 ```
 2. Create and activate a virtual environment (optional but recommended):
