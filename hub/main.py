@@ -63,6 +63,7 @@ def on_connect(client, userdata, flags, rc):
 
 def on_message(client, userdata, msg):
     try:
+        logging.info("Have got a message")
         payload: str = msg.payload.decode("utf-8")
         # Create ProcessedAgentData instance with the received data
         processed_agent_data = ProcessedAgentData.model_validate_json(
