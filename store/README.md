@@ -1,27 +1,23 @@
 # Store
-## Instructions for Starting the Project
-To start the Store, follow these steps:
-1. Clone the repository to your local machine:
-```bash
-git clone https://github.com/Tools/store.git
-cd store
-```
-2. Create and activate a virtual environment (optional but recommended):
-```bash
-python -m venv venv
-source venv/bin/activate  # On Windows, use: venv\Scripts\activate
-```
-3. Install the project dependencies:
+
+## Locally
+
+1. Install the project dependencies:
 ```bash
 pip install -r requirements.txt
 ```
-4. Run the system:
+2. Run the system:
 ```bash
-python ./main.py
+uvicorn main:app --host 0.0.0.0
 ```
-## Common Commands
-### 1. Saving Requirements
-To save the project dependencies to the requirements.txt file:
+
+## Docker
+
+1. Open docker folder
 ```bash
-pip freeze > requirements.txt
+cd docker
+```
+2. Build and Up containers
+```bash
+docker-compose up -d --build
 ```
