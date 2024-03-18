@@ -16,7 +16,6 @@ MQTT_TOPIC = os.environ.get("MQTT_TOPIC") or "agent_data_topic"
 # Configuration for hub MQTT
 HUB_MQTT_BROKER_HOST = os.environ.get("HUB_MQTT_BROKER_HOST") or "localhost"
 HUB_MQTT_BROKER_PORT = try_parse_int(os.environ.get("HUB_MQTT_BROKER_PORT")) or 1883
-HUB_MQTT_TOPIC = os.environ.get("HUB_MQTT_TOPIC") or "agent_data_topic"
 HUB_MQTT_PROCESSED_TOPIC=os.environ.get("HUB_MQTT_PROCESSED_TOPIC" or "processed_agent_data_topic")
 
 # Configuration for the Hub
