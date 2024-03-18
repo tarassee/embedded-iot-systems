@@ -14,6 +14,20 @@ services:
     networks:
       mqtt_network:
 
+  fake_agent:
+    container_name: agent
+    build: ../../agent
+    image: agent
+    depends_on:
+      - mqtt
+      - postgres_db
+    environment:
+      MQTT_BROKER_HOST: "mqtt"
+      MQTT_BROKER_PORT: 1883
+      MQTT_TOPIC: "agent_data_topic"
+      DELAY: 0.1
+    networks:
+      mqtt_network:
 
   postgres_db:
     image: postgres:latest
@@ -89,7 +103,7 @@ services:
       REDIS_PORT: 6379
       MQTT_BROKER_HOST: "mqtt"
       MQTT_BROKER_PORT: 1883
-      MQTT_TOPIC: "processed_data_topic"
+      MQTT_TOPIC: "agent_data_topic"
       BATCH_SIZE: 1
     ports:
       - "9000:8000"
@@ -98,8 +112,29 @@ services:
       hub_store:
       hub_redis:
 
+  edge:
+    container_name: edge
+    image: edge:0.1
+    build:
+      dockerfile: ../../edge/Dockerfile
+    depends_on:
+      - mqtt
+    environment:
+      MQTT_BROKER_HOST: "mqtt"
+      MQTT_BROKER_PORT: 1883
+      MQTT_TOPIC: " "
+      HUB_HOST: "store"
+      HUB_PORT: 8000
+      HUB_MQTT_BROKER_HOST: "mqtt"
+      HUB_MQTT_BROKER_PORT: 1883
+      HUB_MQTT_TOPIC: "processed_data_topic"
+    networks:
+      mqtt_network:
+      edge_hub:
+    pull_policy: never
 
 networks:
+  edge_hub:
   mqtt_network:
   db_network:
   hub_store:
