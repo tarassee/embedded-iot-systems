@@ -40,9 +40,8 @@ class AgentMQTTAdapter(AgentGateway):
             agent_data = AgentData.model_validate_json(payload, strict=True)
             # Process the received data (you can call a use case here if needed)
             processed_data = process_agent_data(agent_data)
-            logging.info("processing data! " + payload)
             # Store the agent_data in the database (you can send it to the data processing module)
-
+            logging.info("have data")
             if not self.hub_gateway.save_data(processed_data):
                 logging.error("Hub is not available")
         except Exception as e:
@@ -58,22 +57,3 @@ class AgentMQTTAdapter(AgentGateway):
 
     def stop(self):
         self.client.loop_stop()
-
-
-# Usage example:
-if __name__ == "__main__":
-    broker_host = "localhost"
-    broker_port = 1883
-    topic = "agent_data_topic"
-    # Assuming you have implemented the StoreGateway and passed it to the adapter
-    store_gateway = HubGateway()
-    adapter = AgentMQTTAdapter(broker_host, broker_port, topic, store_gateway)
-    adapter.connect()
-    adapter.start()
-    try:
-        # Keep the adapter running in the background
-        while True:
-            pass
-    except KeyboardInterrupt:
-        adapter.stop()
-        logging.info("Adapter stopped.")

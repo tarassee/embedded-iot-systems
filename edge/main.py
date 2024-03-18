@@ -7,6 +7,7 @@ from config import (
     MQTT_BROKER_PORT,
     MQTT_TOPIC,
     HUB_URL,
+    HUB_MQTT_PROCESSED_TOPIC,
     HUB_MQTT_BROKER_HOST,
     HUB_MQTT_BROKER_PORT,
     HUB_MQTT_TOPIC,
@@ -29,13 +30,13 @@ if __name__ == "__main__":
     hub_adapter = HubMqttAdapter(
         broker=HUB_MQTT_BROKER_HOST,
         port=HUB_MQTT_BROKER_PORT,
-        topic=HUB_MQTT_TOPIC,
+        topic=HUB_MQTT_PROCESSED_TOPIC,
     )
     # Create an instance of the AgentMQTTAdapter using the configuration
     agent_adapter = AgentMQTTAdapter(
         broker_host=MQTT_BROKER_HOST,
         broker_port=MQTT_BROKER_PORT,
-        topic=MQTT_TOPIC,
+        topic=HUB_MQTT_TOPIC,
         hub_gateway=hub_adapter,
     )
     try:
