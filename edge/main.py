@@ -10,7 +10,6 @@ from config import (
     HUB_MQTT_PROCESSED_TOPIC,
     HUB_MQTT_BROKER_HOST,
     HUB_MQTT_BROKER_PORT,
-    HUB_MQTT_TOPIC,
 )
 
 if __name__ == "__main__":
@@ -36,7 +35,7 @@ if __name__ == "__main__":
     agent_adapter = AgentMQTTAdapter(
         broker_host=MQTT_BROKER_HOST,
         broker_port=MQTT_BROKER_PORT,
-        topic=HUB_MQTT_TOPIC,
+        topic=MQTT_TOPIC,
         hub_gateway=hub_adapter,
     )
     try:
