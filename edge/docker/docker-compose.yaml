@@ -42,7 +42,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
       - ../../store/docker/db/structure.sql:/docker-entrypoint-initdb.d/structure.sql
     ports:
-      - "5432:5432"
+      - "5433:5432"
     networks:
       db_network:
 
@@ -106,7 +106,7 @@ services:
       MQTT_BROKER_HOST: "mqtt"
       MQTT_BROKER_PORT: 1883
       MQTT_TOPIC: "processed_agent_data_topic"
-      BATCH_SIZE: 1
+      BATCH_SIZE: 20
     ports:
       - "9000:8000"
     networks:
