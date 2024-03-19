@@ -40,7 +40,7 @@ services:
       POSTGRES_DB: test_db
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./db/structure.sql:/docker-entrypoint-initdb.d/structure.sql
+      - ../../store/docker/db/structure.sql:/docker-entrypoint-initdb.d/structure.sql
     ports:
       - "5432:5432"
     networks:
@@ -117,8 +117,7 @@ services:
   edge:
     container_name: edge
     image: edge
-    build:
-      dockerfile: ../
+    build: ../
     depends_on:
       - mqtt
     environment:
