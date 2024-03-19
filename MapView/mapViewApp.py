@@ -2,6 +2,7 @@ from kivy.app import App
 from kivy.clock import Clock
 from kivy_garden.mapview import MapView, MapMarker
 
+from datasource import Datasource
 from lineMapLayer import LineMapLayer
 
 
@@ -37,7 +38,8 @@ class MapViewApp(App):
             self.create_pit(point, "images/bump.png")
         elif pit == "normal":
             self.move_car(point)
-        print(f"unknown pit value", {pit})
+        else:
+            print(f"unknown pit value", {pit})
 
     def create_pit(self, point, pit_img) -> None:
         self.pit = MapMarker(
